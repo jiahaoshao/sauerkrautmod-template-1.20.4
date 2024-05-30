@@ -67,7 +67,7 @@ public class PavingBallEntity extends ThrownItemEntity {
        }
    }
 
-    @Override
+    @ Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
