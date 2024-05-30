@@ -1,5 +1,6 @@
 package name.sauerkrautmod;
 
+import name.sauerkrautmod.enchantment.ModEnchantments;
 import name.sauerkrautmod.item.ModItemGroups;
 import name.sauerkrautmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -35,6 +36,7 @@ public class SauerkrautMod implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
+		ModEnchantments.registerModEnchantments();
 	}
 	public static Identifier id(String name) {
 		return new Identifier(MOD_ID, name);
