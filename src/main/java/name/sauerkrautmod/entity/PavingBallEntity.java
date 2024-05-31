@@ -1,6 +1,8 @@
 package name.sauerkrautmod.entity;
 
+import name.sauerkrautmod.SauerkrautMod;
 import name.sauerkrautmod.item.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -84,6 +86,67 @@ public class PavingBallEntity extends ThrownItemEntity {
 //        }
     }
 
+    private BlockPos pos1 = null, pos2 = null;
+
+
+    public void place()
+    {
+        double x1 = pos1.getX(), y1 = pos1.getY(), z1 = pos1.getZ();
+        double x2 = pos2.getX(), y2 = pos2.getY(), z2 = pos2.getZ();
+        //double A = 1, B = (x2-x1)/(y2-y1), C = -x1-B*y1 + 2*(x2-x1)/(z2-z1)*z1;
+        if(x1 > x2)
+        {
+            double t = x1;
+            x1 = x2;
+            x2 = t;
+        }
+        if(y1 > y2)
+        {
+            double t = y1;
+            y1 = y2;
+            y2 = t;
+        }
+        if(z1 > z2)
+        {
+            double t = z1;
+            z1 = z2;
+            z2 = t;
+        }
+        for(double a = x1; a <= x2; a ++)
+        {
+            for(double b = y1; b <= y2; b ++)
+            {
+                for(double c = z1; c <= z2; c ++)
+                {
+//                    SauerkrautMod.LOGGER.info(String.valueOf(Math.abs(A*a + B*b + C*c)));
+//
+//                    if(Math.abs(A*a + B*b + C*c) <= 1)
+//                    {
+//                        BlockPos bp = new BlockPos((int)a, (int)b, (int)c);
+//                        SauerkrautMod.LOGGER.info(a + "," + b + "," + c + "YES");
+//                        World world = this.getWorld();
+//                        world.setBlockState(bp, Blocks.DIAMOND_BLOCK.getDefaultState());
+//                    }
+                    BlockPos bp = new BlockPos((int)a, (int)b, (int)c);
+                    World world = this.getWorld();
+                    world.setBlockState(bp, Blocks.STONE.getDefaultState());
+                    //SauerkrautMod.LOGGER.info(a + "," + b + "," + c);
+                }
+            }
+        }
+    }
+
+
+    private final BlockPos firstPos = BlockPos.ofFloored(this.getPos());
+
+    public double dis(BlockPos pos)
+    {
+        int x = pos.getX() - firstPos.getX();
+        int y = pos.getY() - firstPos.getY();
+        int z = pos.getZ() - firstPos.getZ();
+        return Math.sqrt(x * x + y * y + z * z);
+    }
+
     @Override
     public void tick() {
         BlockPos pos = BlockPos.ofFloored(this.getPos());
@@ -102,9 +165,18 @@ public class PavingBallEntity extends ThrownItemEntity {
                 pos = new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ());
             if(owner.getHorizontalFacing() == Direction.UP)
                 pos = new BlockPos(pos.getX() , pos.getY() + 2, pos.getZ());
-            World world = this.getWorld();
-            world.setBlockState(pos, Blocks.DIAMOND_BLOCK.getDefaultState());
+
+            pos2 = pos1;
+            if(pos2 == null)
+                pos2 = pos;
+            pos1 = pos;
+            if(pos2 != null)
+                place();
         }
+
+        if(dis(pos) >= 100)
+            this.discard();
+
 
         float h;
         super.tick();
@@ -143,10 +215,17 @@ public class PavingBallEntity extends ThrownItemEntity {
             h = 0.99f;
         }
         this.setVelocity(vec3d.multiply(h));
+        //this.setVelocity(vec3d.getX() * h, 0, vec3d.getZ() * h);
         if (!this.hasNoGravity()) {
             Vec3d vec3d2 = this.getVelocity();
             this.setVelocity(vec3d2.x, vec3d2.y - (double)this.getGravity(), vec3d2.z);
         }
         this.setPosition(d, e, f);
+    }
+
+
+    @Override
+    protected float getGravity() {
+        return 0.0f;
     }
 }
