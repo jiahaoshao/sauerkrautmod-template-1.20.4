@@ -20,11 +20,11 @@ public abstract class EnchantmentMixin {
      * @author
      * Fang_yi
      * @reason
-     * 让不死图腾可以附魔
+     * 让不死图腾、桶、水桶、岩浆桶可以附魔
      */
     @Overwrite
     public boolean isAcceptableItem(ItemStack stack) {
-        if(stack.isOf(Items.TOTEM_OF_UNDYING))
+        if(stack.isOf(Items.TOTEM_OF_UNDYING) || stack.isOf(Items.BUCKET) || stack.isOf(Items.WATER_BUCKET) || stack.isOf(Items.LAVA_BUCKET))
             return true;
         return this.target.isAcceptableItem(stack.getItem());
     }

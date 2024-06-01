@@ -3,8 +3,8 @@
   "package": "name.sauerkrautmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin",
     "InfiniteUndyingMixin",
+    "LightningImmuneMixin",
     "enchantmentmixin.EnchantmentMixin"
   ],
   "injectors": {
