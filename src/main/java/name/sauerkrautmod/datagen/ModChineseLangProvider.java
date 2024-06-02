@@ -1,11 +1,14 @@
 package name.sauerkrautmod.datagen;
 
 import com.terraformersmc.modmenu.util.mod.Mod;
+import name.sauerkrautmod.SauerkrautMod;
+import name.sauerkrautmod.block.ModBlocks;
 import name.sauerkrautmod.enchantment.ModEnchantments;
 import name.sauerkrautmod.item.ModItemGroups;
 import name.sauerkrautmod.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.util.Identifier;
 
 public class ModChineseLangProvider extends FabricLanguageProvider {
     public ModChineseLangProvider(FabricDataOutput dataOutput) {
@@ -21,5 +24,8 @@ public class ModChineseLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PAVING_BALL,"铺路石");
         translationBuilder.add(ModEnchantments.LIGHTNING_ATTACK, "闪电打击");
         translationBuilder.add(ModEnchantments.LIGHTNING_IMMUNE, "闪电免疫");
+        translationBuilder.add(ModBlocks.BOQI_BLOCK, "波奇方块");
+        //translationBuilder.add(ModBlocks.RUBY_BLOCK,"鲁比方块");
+        //translationBuilder.add(new Identifier("item.sauerkrautmod","prospector.tooltip"), "试试用它右键地面吧");
     }
 }

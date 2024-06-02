@@ -1,5 +1,6 @@
 package name.sauerkrautmod;
 
+import name.sauerkrautmod.block.ModBlocks;
 import name.sauerkrautmod.enchantment.ModEnchantments;
 import name.sauerkrautmod.item.ModItemGroups;
 import name.sauerkrautmod.item.ModItems;
@@ -37,6 +38,7 @@ public class SauerkrautMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 		ModEnchantments.registerModEnchantments();
+		ModBlocks.registerModBlocks();
 	}
 	public static Identifier id(String name) {
 		return new Identifier(MOD_ID, name);

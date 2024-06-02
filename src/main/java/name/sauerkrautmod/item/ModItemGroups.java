@@ -1,6 +1,8 @@
 package name.sauerkrautmod.item;
 
 import name.sauerkrautmod.SauerkrautMod;
+import name.sauerkrautmod.block.ModBlocks;
+import name.sauerkrautmod.enchantment.ModEnchantments;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,7 @@ public class ModItemGroups {
                 .icon(() -> new ItemStack(ModItems.PROSPECTOR))
                 .displayName(Text.translatable("itemgroup.sauerkrautmod.item_group"))
                 .entries((content, entries) -> {
+                    entries.add(ModBlocks.BOQI_BLOCK);
                 })
                 .build());
 
